@@ -1,0 +1,49 @@
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+export default function Lab7() {
+    const [state, setState] = useState({from_name : '', message : ''});
+    const sendmail = () => {
+        const parameters = {
+            from_name : state.from_name,
+            to_name : "Eshwarrrrr",
+            message : state.message,
+        }
+        emailjs.send(
+            "service_f1303qf",
+            "template_waxve0p",
+            parameters,
+            "C36jFpL88pYIazG9-"
+        )
+        .then((response) => {
+            console.log('Email sent successfully!', response.status, response.text);
+        })
+        .catch((error) => {
+            console.error('Failed to send email. Error: ', error);
+        });
+        console.log("Sent");
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        sendmail();
+        alert("Form Submitted");
+    }
+    const handleChange = (event) => {
+        setState(prev => ({...prev, [event.target.name]:event.target.value}));
+    }
+  return (
+    <div>
+        <form onSubmit={handleSubmit}>
+            <br />
+            <label htmlFor="n">Name : </label>
+            <input type="text" name="from_name" id="n" onChange={handleChange}/>
+            <br />
+            <br />
+            <label htmlFor="n">Message : </label>
+            <input type="text" name="message" id="m" onChange={handleChange}/>
+            <br />
+            <br />
+            <button type="submit">Submit Details</button>
+        </form>
+    </div>
+  )
+}

@@ -1,0 +1,72 @@
+App.js
+
+
+import './App.css';
+import Navbar from './MyComponents/Navbar';
+import Home from './MyComponents/Home';
+import About from './MyComponents/About';
+import Contact from './MyComponents/Contact';
+import React, { useState } from 'react';
+
+function App() {
+
+  const [page, setPage] = useState('home');
+
+  let PageComponent;
+  switch (page) {
+    case 'home':
+      PageComponent = Home;
+      break;
+    case 'about':
+      PageComponent = About;
+      break;
+    case 'contact':
+      PageComponent = Contact;
+      break;
+    default:
+      PageComponent = Home;
+  }
+
+
+  return (
+    <div className="App">
+      <Navbar setPage={setPage}/>
+      <PageComponent/>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+Navbar.js
+
+
+
+import React from 'react';
+
+const Navbar = ({ setPage }) => {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <button onClick={() => setPage('home')}>Home</button>
+        </li>
+        <li>
+          <button onClick={() => setPage('about')}>About Us</button>
+        </li>
+        <li>
+          <button onClick={() => setPage('contact')}>Contact Us</button>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Navbar;
